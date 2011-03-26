@@ -1,10 +1,7 @@
-LIGHT_RED_FG="\e[1;31m"
-LIGHT_GREEN_FG="\e[1;32m"
-LIGHT_BLACK_BG="\e[1;40m"
-RESET="\e[0m"
+#!/bin/sh
 
-export LIGHT_RED_FG
-export LIGHT_GREEN_FG
-export LIGHT_BLACK_BG
-export RESET
+export LIGHT_RED_FG="\e[1;31m"
+export LIGHT_GREEN_FG="\e[1;32m"
+export LIGHT_BLACK_BG="\e[1;40m"
+export RESET="\e[0m"
 

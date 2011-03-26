@@ -1,6 +1,8 @@
 #!/bin/sh
 
-# This function will show the current git branch we are standing on
+# Shows the current git branch we are standing on, in 
+# case there is none, it simply returns an empty string
+#
 function parse_git_branch {
   # we are getting the result of the previous command here to 
   # return it later on
@@ -11,20 +13,33 @@ function parse_git_branch {
   exit $result
 }
 
+# Returns a Green '$' prompt if the last command was 
+# successful (returned 0) or a red '$' prompt with the
+# error status code otherwise
+#
 function last_command_result {
   result=$?
   if [ $result = 0 ]
   # print a green "$" sign if the last command was successful
-  then printf "$LIGHT_GREEN_FG\$$RESET "
+  then echo "\[$LIGHT_GREEN_FG\]\$\[$RESET\] "
   # print the error status code and a red "$" sign if the last
   # command was not successful
-  else printf "$LIGHT_RED_FG[$result] \$$RESET "
+  else echo "\[$LIGHT_RED_FG[$result] \$\]\[$RESET\] "
   fi
 }
 
 # This prompt should print:
 # username@host_name: path_relative_to_home [branch: git branch]
 # [error_status_code] $
-PS1="\u@\h: $LIGHT_RED_FG\w$RESET $LIGHT_GREEN_FG\$(parse_git_branch)$RESET\n\$(last_command_result)"
+
+# In the prompt, we are adding \[\] to each color in order to escape
+# invisible characters in the PROMPT, that way it won't get fucked
+# up when having long lines on when deleting lines using <C-u>.
+# More Info:
+# http://www.faqs.org/docs/Linux-HOWTO/Bash-Prompt-HOWTO.html#NONPRINTINGCHARS
+
+PS1="\u@\h: \[$LIGHT_RED_FG\]\w\[$RESET\] \
+\[$LIGHT_GREEN_FG\]`parse_git_branch`\[$RESET\]\n\
+`last_command_result`"
 export PS1
 
