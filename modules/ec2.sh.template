@@ -1,0 +1,21 @@
+#!/bin/sh
+
+# If EC2_HOME is defined, it means this script
+# has already been executed, otherwise, we start
+# the configuration
+if [ -z $EC2_HOME ]
+then
+  EC2_HOME="<YOUR-EC2-INSTALLATION-DIR>"
+  export EC2_HOME
+
+  EC2_PRIVATE_KEY="<PATH-TO-YOUR-PRIVATE-KEY-PEM-FILE>"
+  export EC2_PRIVATE_KEY
+
+  EC2_CERT="<PATH-TO-YOUR-CERT-KEY-PEM-FILE>"
+  export EC2_CERT
+
+  # We Include in PATH the ec2 commands
+  PATH="$PATH:$EC2_HOME/bin"
+  export PATH
+fi
+

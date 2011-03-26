@@ -1,0 +1,10 @@
+LIGHT_RED_FG="\e[1;31m"
+LIGHT_GREEN_FG="\e[1;32m"
+LIGHT_BLACK_BG="\e[1;40m"
+RESET="\e[0m"
+
+export LIGHT_RED_FG
+export LIGHT_GREEN_FG
+export LIGHT_BLACK_BG
+export RESET
+
