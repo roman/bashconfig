@@ -1,0 +1,6 @@
+Get Started
+
+$ mv bashconfig ~/.bash
+$ ln -s ~/.bash/bashrc ~/.profile
+$ source ~/.profile
+
