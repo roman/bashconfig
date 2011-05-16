@@ -8,7 +8,7 @@ then
   VIM_HOME="~/.vim"
   export VIM_HOME
 
-  EDITOR="vim -f"
+  EDITOR="/usr/bin/vim"
   export EDITOR
 fi
 
