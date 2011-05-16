@@ -24,6 +24,8 @@ source $modules/git.sh
 source $modules/haskell.sh
 # == Homebrew config
 source $modules/homebrew.sh
+# == Home Binaries
+source $modules/localbin.sh
 # == Load the EC2 config if available
 if [ -e $modules/ec2.sh ]
 then source $modules/ec2.sh
