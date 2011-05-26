@@ -5,11 +5,11 @@
 # we skip
 if [ -z $CABAL_HOME ]
 then
-  CABAL_HOME="~/.cabal"
+  CABAL_HOME="$HOME/.cabal"
   export CABAL_HOME
 
   # Adding Cabal executables to the PATH
-  PATH="$PATH:~/.cabal/bin"
+  PATH="$PATH:$HOME/.cabal/bin"
   export PATH
 fi
 

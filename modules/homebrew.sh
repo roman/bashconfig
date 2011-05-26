@@ -6,7 +6,7 @@
 if [ -z $HOMEBREW_HOME ]
 then 
   # HOMEBREW_HOME="/usr/local"
-  HOMEBREW_HOME="~/.homebrew"
+  HOMEBREW_HOME="$HOME/.homebrew"
   export HOMEBREW_HOME
 
   

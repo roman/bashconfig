@@ -5,7 +5,7 @@
 # we skip
 if [ -z $VIM_HOME ]
 then 
-  VIM_HOME="~/.vim"
+  VIM_HOME="$HOME/vim"
   export VIM_HOME
 
   EDITOR="/usr/bin/vim"

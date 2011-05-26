@@ -2,8 +2,8 @@
 
 # If the home binary folder is not included
 # in the PATH variable, include it.
-if ! [[ $PATH = *~/.bin* ]]
+if ! [[ $PATH = *$HOME/bin* ]]
 then
-  PATH="~/.bin:$PATH"
+  PATH="$HOME/.bin:$PATH"
   export PATH
 fi
