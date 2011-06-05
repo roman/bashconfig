@@ -2,7 +2,7 @@
 set -o vi 
 
 # The OS we are currently using
-platform=`uname -r`
+platform=`uname -s`
 
 modules="$HOME/.bash/modules"
 # == General colors to use on the terminal
