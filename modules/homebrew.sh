@@ -3,7 +3,8 @@
 # If HOMEBREW_HOME has length eq to zero
 # we start with initialization, otherwise
 # we skip
-if [ -z $HOMEBREW_HOME ]
+if [ -z $HOMEBREW_HOME ] && 
+   \[ $platform = 'Darwin' ]
 then 
   # HOMEBREW_HOME="/usr/local"
   HOMEBREW_HOME="$HOME/.homebrew"

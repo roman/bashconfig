@@ -1,9 +1,8 @@
 # Terminal will have vi mode when <ESC> is pressed
 set -o vi 
 
-# Allow the ls command to have colors when displaying directories
-export CLICOLOR=1
-export LSCOLOR=ExFxCxDxBxegedabagacad
+# The OS we are currently using
+platform=`uname -r`
 
 modules="$HOME/.bash/modules"
 # == General colors to use on the terminal
