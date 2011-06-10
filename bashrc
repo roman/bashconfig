@@ -2,7 +2,7 @@
 set -o vi 
 
 # The OS we are currently using
-platform=`uname -s`
+platform=`uname`
 
 modules="$HOME/.bash/modules"
 # == General colors to use on the terminal
@@ -30,3 +30,4 @@ if [ -e $modules/ec2.sh ]
 then source $modules/ec2.sh
 fi
 
+vim
