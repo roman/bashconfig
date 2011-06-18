@@ -1,5 +1,5 @@
 # Terminal will have vi mode when <ESC> is pressed
-set -o vi 
+set -o vi
 
 # The OS we are currently using
 platform=`uname`
@@ -11,7 +11,7 @@ source $modules/colors.sh
 source $modules/prompt.sh
 # == Handy Aliases
 source $modules/aliases.sh
-# == Java config 
+# == Java config
 source $modules/java.sh
 # == Ruby config
 source $modules/ruby.sh
@@ -30,4 +30,5 @@ if [ -e $modules/ec2.sh ]
 then source $modules/ec2.sh
 fi
 
-vim
+export NODE_PATH=~/node_modules
+
