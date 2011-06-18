@@ -1,16 +1,31 @@
 #!/bin/sh
 
 # Prints an exclamation (!) whenever
-# there is a modified/deleted file on the repo
+# there is a modified file (not on the index)
 function prompt_git_is_there_modified_files {
   local result=$?
   
-  git_result=`git status 2> /dev/null | sed -e '/modified:\|deleted:/!d' | wc -l`
+  git_result=`git status 2> /dev/null | sed -n '/Changes not staged for commit:/p'`
   
-  if [ $git_result != '0' ]; then
+  if [ -n "$git_result" ]; then
     echo '!'
   fi
 
+  exit $result
+}
+
+# Prints an exclamation (!) whenever
+# there is a modified file (on the index)
+function prompt_git_is_there_files_on_index {
+  local result=$?
+
+  git_result=`git status 2> /dev/null | sed -n '/Changes to be committed:/p'`
+
+  if [ -n "$git_result" ]; then
+    echo '!'
+  fi
+
+   
   exit $result
 }
 
@@ -19,9 +34,9 @@ function prompt_git_is_there_modified_files {
 function prompt_git_is_there_new_files {
   local result=$?
   
-  git_result=`git status 2> /dev/null | sed -n '/Untracked files:/,/^[^#]/p' | sed -n '4,$p' | sed -e '/^[^#]/d' | wc -l`
+  git_result=`git status 2> /dev/null | sed -n '/Untracked files:/p'`
 
-  if [ $git_result != '0' ]; then
+  if [ -n "$git_result" ]; then
     echo '?'
   fi
 
@@ -87,6 +102,7 @@ export PS1="\u@\h: \[$LIGHT_RED_FG\]\w\[$RESET\] \
 \[$LIGHT_GREEN_FG\][\$(prompt_git_current_branch)\
 \[$LIGHT_YELLOW_FG\]\$(prompt_git_is_there_new_files)\[$RESET\]\
 \[$LIGHT_RED_FG\]\$(prompt_git_is_there_modified_files)\[$RESET\]\
+\[$LIGHT_GREEN_FG\]\$(prompt_git_is_there_files_on_index)\[$RESET\]\
 \[$LIGHT_GREEN_FG\]]\[$RESET\]\n\
 \[\$(color_for_last_command_result)\]\$(last_command_result)\$\[$RESET\] "
 
