@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# Prints an exclamation (!) whenever
+# there is a modified/deleted file on the repo
 function prompt_git_is_there_modified_files {
   local result=$?
   
@@ -12,6 +14,8 @@ function prompt_git_is_there_modified_files {
   exit $result
 }
 
+# Prints a question mark (?) whenever 
+# there is a not versioned file on the repo
 function prompt_git_is_there_new_files {
   local result=$?
   
@@ -24,7 +28,7 @@ function prompt_git_is_there_new_files {
   exit $result
 }
 
-# Shows the current git branch we are standing on, in 
+# Prints the current git branch on the repo, in 
 # case there is none, it simply returns an empty string
 #
 function prompt_git_current_branch {
