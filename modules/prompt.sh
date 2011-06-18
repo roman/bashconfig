@@ -1,5 +1,29 @@
 #!/bin/sh
 
+function is_there_modified_files {
+  local result=$?
+  
+  git_result=`git status 2> /dev/null | sed -e '/modified:\|deleted:/!d' | wc -l`
+  
+  if [ $git_result != '0' ]; then
+    echo '!'
+  fi
+
+  exit $result
+}
+
+function is_there_new_files {
+  local result=$?
+  
+  git_result=`git status 2> /dev/null | sed -n '/Untracked files:/,/^[^#]/p' | sed -n '4,$p' | sed -e '/^[^#]/d' | wc -l`
+
+  if [ $git_result != '0' ]; then
+    echo '?'
+  fi
+
+  exit $result
+}
+
 # Shows the current git branch we are standing on, in 
 # case there is none, it simply returns an empty string
 #
@@ -8,7 +32,7 @@ function parse_git_branch {
   # return it later on
   local result=$? 
 
-  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/[branch: \1]/'
+  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/branch: \1/'
 
   exit $result
 }
@@ -56,6 +80,9 @@ function color_for_last_command_result {
 # http://www.faqs.org/docs/Linux-HOWTO/Bash-Prompt-HOWTO.html#NONPRINTINGCHARS
 
 export PS1="\u@\h: \[$LIGHT_RED_FG\]\w\[$RESET\] \
-\[$LIGHT_GREEN_FG\]\$(parse_git_branch)\[$RESET\]\n\
+\[$LIGHT_GREEN_FG\][\$(parse_git_branch)\
+\[$LIGHT_YELLOW_FG\]\$(is_there_new_files)\[$RESET\]\
+\[$LIGHT_RED_FG\]\$(is_there_modified_files)\[$RESET\]\
+\[$LIGHT_GREEN_FG\]]\[$RESET\]\n\
 \[\$(color_for_last_command_result)\]\$(last_command_result)\$\[$RESET\] "
 
