@@ -21,6 +21,8 @@ source $modules/vim.sh
 source $modules/git.sh
 # == Haskell config
 source $modules/haskell.sh
+# == Node.js config
+source $modules/nodejs.sh
 # == Homebrew config
 source $modules/homebrew.sh
 # == Home Binaries
@@ -30,5 +32,4 @@ if [ -e $modules/ec2.sh ]
 then source $modules/ec2.sh
 fi
 
-export NODE_PATH=~/node_modules
 
