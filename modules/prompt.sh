@@ -51,7 +51,7 @@ function prompt_git_current_branch {
   # return it later on
   local result=$? 
 
-  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/git: \1/'
+  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/- git: \1/'
 
   exit $result
 }
@@ -99,10 +99,10 @@ function color_for_last_command_result {
 # http://www.faqs.org/docs/Linux-HOWTO/Bash-Prompt-HOWTO.html#NONPRINTINGCHARS
 
 export PS1="\u@\h: \[$LIGHT_RED_FG\]\w\[$RESET\] \
-\[$LIGHT_GREEN_FG\][\$(prompt_git_current_branch)\
+\[$LIGHT_GREEN_FG\]\$(prompt_git_current_branch)\
 \[$LIGHT_GREEN_FG\]\$(prompt_git_is_there_files_on_index)\[$RESET\]\
 \[$LIGHT_RED_FG\]\$(prompt_git_is_there_modified_files)\[$RESET\]\
 \[$LIGHT_YELLOW_FG\]\$(prompt_git_is_there_new_files)\[$RESET\]\
-\[$LIGHT_GREEN_FG\]]\[$RESET\]\n\
+\[$LIGHT_GREEN_FG\]\[$RESET\]\n\
 \[\$(color_for_last_command_result)\]\$(last_command_result)\$\[$RESET\] "
 
