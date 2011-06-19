@@ -14,7 +14,7 @@ function prompt_git_is_there_modified_files {
   exit $result
 }
 
-# Prints an exclamation (!) whenever
+# Prints an star (*) whenever
 # there is a modified file (on the index)
 function prompt_git_is_there_files_on_index {
   local result=$?
@@ -22,7 +22,7 @@ function prompt_git_is_there_files_on_index {
   git_result=`git status 2> /dev/null | sed -n '/Changes to be committed:/p'`
 
   if [ -n "$git_result" ]; then
-    echo '!'
+    echo '*'
   fi
 
    
@@ -99,10 +99,10 @@ function color_for_last_command_result {
 # http://www.faqs.org/docs/Linux-HOWTO/Bash-Prompt-HOWTO.html#NONPRINTINGCHARS
 
 export PS1="\u@\h: \[$LIGHT_RED_FG\]\w\[$RESET\] \
-\[$LIGHT_GREEN_FG\][\$(prompt_git_current_branch)\
-\[$LIGHT_YELLOW_FG\]\$(prompt_git_is_there_new_files)\[$RESET\]\
-\[$LIGHT_RED_FG\]\$(prompt_git_is_there_modified_files)\[$RESET\]\
+\[$LIGHT_GREEN_FG\][\$(prompt_git_current_branch) \
 \[$LIGHT_GREEN_FG\]\$(prompt_git_is_there_files_on_index)\[$RESET\]\
+\[$LIGHT_RED_FG\]\$(prompt_git_is_there_modified_files)\[$RESET\]\
+\[$LIGHT_YELLOW_FG\]\$(prompt_git_is_there_new_files)\[$RESET\]\
 \[$LIGHT_GREEN_FG\]]\[$RESET\]\n\
 \[\$(color_for_last_command_result)\]\$(last_command_result)\$\[$RESET\] "
 
