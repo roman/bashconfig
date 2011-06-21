@@ -9,6 +9,14 @@ function prompt_git_is_there_modified_files {
   
   if [ -n "$git_result" ]; then
     echo '!'
+    exit $result
+  fi
+
+  git_result=`git status 2> /dev/null | sed -n '/Changed but not updated:/p'` 
+
+  if [ -n "$git_result" ]; then
+    echo '!'
+    exit $result
   fi
 
   exit $result
