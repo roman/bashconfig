@@ -15,7 +15,7 @@ function prompt_git_is_there_modified_files {
   git_result=`git status 2> /dev/null | sed -n '/Changed but not updated:/p'` 
 
   if [ -n "$git_result" ]; then
-    echo '!'
+    echo '[!]'
     exit $result
   fi
 
@@ -30,7 +30,7 @@ function prompt_git_is_there_files_on_index {
   git_result=`git status 2> /dev/null | sed -n '/Changes to be committed:/p'`
 
   if [ -n "$git_result" ]; then
-    echo '*'
+    echo '[*]'
   fi
 
    
@@ -45,7 +45,7 @@ function prompt_git_is_there_new_files {
   git_result=`git status 2> /dev/null | sed -n '/Untracked files:/p'`
 
   if [ -n "$git_result" ]; then
-    echo '?'
+    echo '[?]'
   fi
 
   exit $result
@@ -59,7 +59,7 @@ function prompt_git_current_branch {
   # return it later on
   local result=$? 
 
-  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/- git: \1/'
+  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/- git: \1 /'
 
   exit $result
 }
