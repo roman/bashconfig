@@ -1,68 +1,73 @@
 #!/bin/sh
 
-# Prints an exclamation (!) whenever
-# there is a modified file (not on the index)
-function prompt_git_is_there_modified_files {
+### Git Prompt Utilities
+
+# Displays the info of the git repo on the prompt
+function perform_git_check {
   local result=$?
-  
-  git_result=`git status 2> /dev/null | sed -n '/Changes not staged for commit:/p'`
-  
-  if [ -n "$git_result" ]; then
-    echo '!'
-    exit $result
-  fi
 
-  git_result=`git status 2> /dev/null | sed -n '/Changed but not updated:/p'` 
+  local git_branch=`git branch 2> /dev/null`
+  if [ -n git_branch ]; then
+    local git_status=`git status 2> /dev/null`
 
-  if [ -n "$git_result" ]; then
-    echo '[!]'
-    exit $result
+    local branch=`prompt_git_current_branch "$git_branch"`
+    local index_files=`prompt_git_is_there_files_on_index "$git_status"`
+    local new_files=`prompt_git_is_there_new_files "$git_status"`
+    local modified_files=`prompt_git_is_there_modified_files "$git_status"`
+    echo "$branch$index_files$modified_files$new_files"
   fi
 
   exit $result
+}
+
+# Prints an exclamation (!) whenever
+# there is a modified file (not on the index)
+function prompt_git_is_there_modified_files {
+  
+  git_result=`echo "$1" | sed -n '/Changes not staged for commit:/p'`
+  
+  if [ -n "$git_result" ]; then
+    printf "$LIGHT_RED_FG[!]$RESET"
+  fi
+
+  git_result=`echo "$1" | sed -n '/Changed but not updated:/p'` 
+
+  if [ -n "$git_result" ]; then
+    printf "$LIGHT_RED_FG[!]$RESET"
+  fi
+
 }
 
 # Prints an star (*) whenever
 # there is a modified file (on the index)
 function prompt_git_is_there_files_on_index {
-  local result=$?
-
-  git_result=`git status 2> /dev/null | sed -n '/Changes to be committed:/p'`
+  local git_result=`echo "$1" | sed -n '/Changes to be committed:/p'`
 
   if [ -n "$git_result" ]; then
-    echo '[*]'
+    printf "$LIGHT_GREEN_FG[*]$RESET"
   fi
-
-   
-  exit $result
 }
 
 # Prints a question mark (?) whenever 
 # there is a not versioned file on the repo
 function prompt_git_is_there_new_files {
-  local result=$?
-  
-  git_result=`git status 2> /dev/null | sed -n '/Untracked files:/p'`
+  local git_result=`echo $1 | sed -n '/Untracked files:/p'`
 
   if [ -n "$git_result" ]; then
-    echo '[?]'
+    printf "$LIGHT_YELLOW_FG[?]$RESET"
   fi
-
-  exit $result
 }
+
 
 # Prints the current git branch on the repo, in 
 # case there is none, it simply returns an empty string
 #
 function prompt_git_current_branch {
-  # we are getting the result of the previous command here to 
-  # return it later on
-  local result=$? 
-
-  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/- git: \1 /'
-
-  exit $result
+  local result=`echo "$1" | sed -e '/^[^*]/d' -e 's/* \(.*\)/- git: \1 /'`
+  printf "$LIGHT_GREEN_FG$result$RESET"
 }
+
+### Last Command utilities
 
 # Returns an error stat code surrounded by brackets
 # e.g => [127]
@@ -105,12 +110,11 @@ function color_for_last_command_result {
 # up when having long lines or when deleting lines using <C-u>.
 # More Info:
 # http://www.faqs.org/docs/Linux-HOWTO/Bash-Prompt-HOWTO.html#NONPRINTINGCHARS
-
+# Exception:
+# We are not using this escaping on the git repo info, this is because
+# the line they are in doesn't have any input, so we don't have to bother
+# about that
 export PS1="\u@\h: \[$LIGHT_RED_FG\]\w\[$RESET\] \
-\[$LIGHT_GREEN_FG\]\$(prompt_git_current_branch)\
-\[$LIGHT_GREEN_FG\]\$(prompt_git_is_there_files_on_index)\[$RESET\]\
-\[$LIGHT_RED_FG\]\$(prompt_git_is_there_modified_files)\[$RESET\]\
-\[$LIGHT_YELLOW_FG\]\$(prompt_git_is_there_new_files)\[$RESET\]\
-\[$LIGHT_GREEN_FG\]\[$RESET\]\n\
+\$(perform_git_check)\n\
 \[\$(color_for_last_command_result)\]\$(last_command_result)\$\[$RESET\] "
 
