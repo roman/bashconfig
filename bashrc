@@ -11,6 +11,8 @@ source $modules/colors.sh
 source $modules/prompt.sh
 # == Handy Aliases
 source $modules/aliases.sh
+# == RVM config
+source $modules/rvm.sh
 # == Java config
 source $modules/java.sh
 # == Ruby config
