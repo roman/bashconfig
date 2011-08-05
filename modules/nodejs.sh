@@ -1,2 +1,3 @@
-export NODE_PATH=~/node_modules
+[[ -s "$HOME/.npm" ]] \
+ && export NODE_PATH="$HOME/.npm/node_modules"
 
