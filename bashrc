@@ -21,6 +21,8 @@ source $modules/ruby.sh
 source $modules/vim.sh
 # == Git config
 source $modules/git.sh
+# == Git Completion utility
+source $modules/git-completion.sh
 # == Haskell config
 source $modules/haskell.sh
 # == Node.js config
