@@ -13,6 +13,7 @@ then
   export LSCOLOR=ExFxCxDxBxegedabagacad
 fi
 
+export WHITE_UNDERSCORE_FG="\033[4;37m"
 export LIGHT_RED_FG="\033[1;31m"
 export LIGHT_GREEN_FG="\033[1;32m"
 export LIGHT_BLACK_BG="\033[1;40m"

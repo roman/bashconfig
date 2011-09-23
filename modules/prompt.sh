@@ -101,6 +101,16 @@ function color_for_last_command_result {
   exit $result
 }
 
+function color_for_user {
+  local result=$?
+  local user=`whoami`
+  if [ $user = 'vagrant' ]
+  then echo -e "$WHITE_UNDERSCORE_FG"
+  fi
+
+  exit $result
+}
+
 # This prompt should print:
 # username@host_name: path_relative_to_home [branch: git branch]
 # [error_status_code] $
@@ -114,7 +124,7 @@ function color_for_last_command_result {
 # We are not using this escaping on the git repo info, this is because
 # the line they are in doesn't have any input, so we don't have to bother
 # about that
-export PS1="\u@\h: \[$LIGHT_RED_FG\]\w\[$RESET\] \
+export PS1="\$(color_for_user)\u$RESET@\h: \[$LIGHT_RED_FG\]\w\[$RESET\] \
 \$(perform_git_check)\n\
 \[\$(color_for_last_command_result)\]\$(last_command_result)\$\[$RESET\] "
 
