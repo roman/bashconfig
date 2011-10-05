@@ -8,8 +8,13 @@ then
   CABAL_HOME="$HOME/.cabal"
   export CABAL_HOME
 
-  # Adding Cabal executables to the PATH
-  PATH="$PATH:$HOME/.cabal/bin"
-  export PATH
 fi
 
+# If the cabal binary folder is not included
+# in the PATH variable, include it.
+if ! [[ $PATH = *$HOME/.cabal/bin* ]]
+then
+  # Adding Cabal executables to the PATH
+  PATH="$HOME/.cabal/bin:$PATH"
+  export PATH
+fi
