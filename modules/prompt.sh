@@ -105,7 +105,7 @@ function color_for_user {
   local result=$?
   local user=`whoami`
   if [ $user = 'vagrant' ]
-  then echo -e "$WHITE_UNDERSCORE_FG"
+  then echo -e "$LIGHT_MAGENTA_FG"
   fi
 
   exit $result
