@@ -115,11 +115,10 @@ function color_for_user {
 
 function get_current_gemset {
   local result=$?
-
-  local current_gemset=`rvm gemset list | grep '=>' | awk '{ print $2 }' 2> /dev/null`
-  if [[ -n current_gemset ]]; then
-    if [[ $current_gemset != '(default)' ]]; then
-        printf "$LIGHT_MAGENTA_FG(gemset: $current_gemset)$RESET "
+  if [[ $(command -v rvm 2>&1 /dev/null) ]]; then
+    local current_gemset=`rvm gemset list | grep '=>' | awk '{ print $2 }' 2> /dev/null`
+    if [[ -n current_gemset ]] && [[ $current_gemset != '(default)' ]]; then
+      printf "$LIGHT_MAGENTA_FG(gemset: $current_gemset)$RESET "
     fi
   fi
 
