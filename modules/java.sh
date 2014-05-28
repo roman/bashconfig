@@ -2,8 +2,7 @@ function get_java_home {
   # get the platform name
   local platform=`uname -s`
 
-  if [ $platform = "Darwin" ]
-  then 
+  if [[ $platform = "Darwin" ]]; then
     echo "/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home"
   else # print blank
     echo ""
@@ -18,6 +17,3 @@ then
   JAVA_HOME=`get_java_home`
   export JAVA_HOME
 fi
-  
-
-

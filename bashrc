@@ -1,8 +1,13 @@
+#!/bin/bash
+
 # Terminal will have vi mode when <ESC> is pressed
-set -o vi
+set -o emacs
 
 # The OS we are currently using
 platform=`uname`
+
+unset PATH
+export PATH="/usr/local/bin:/usr/bin:/bin"
 
 modules="$HOME/.bash/modules"
 # == General colors to use on the terminal
@@ -13,14 +18,10 @@ source $modules/keychain.sh
 source $modules/prompt.sh
 # == Handy Aliases
 source $modules/aliases.sh
-# == RVM config
-source $modules/rvm.sh
 # == Java config
 source $modules/java.sh
-# == Ruby config
-source $modules/ruby.sh
-# == Vim config
-source $modules/vim.sh
+# == Editor config
+source $modules/emacs.sh
 # == Git config
 source $modules/git.sh
 # == Git Completion utility
@@ -33,6 +34,10 @@ source $modules/nodejs.sh
 source $modules/homebrew.sh
 # == Home Binaries
 source $modules/localbin.sh
+# == Ruby config
+source $modules/ruby.sh
+# == RVM config
+source $modules/rvm.sh
 # == Load the EC2 config if available
 if [ -e $modules/ec2.sh ]
 then source $modules/ec2.sh
@@ -45,3 +50,7 @@ if [[ $- != *i* ]] ; then
   # Shell is non-interactive.  Be done now!
   return
 fi
+
+unset PROMPT_COMMAND
+
+export SLIMERJSLAUNCHER=/Applications/Firefox.app/Contents/MacOS/firefox
