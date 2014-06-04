@@ -10,6 +10,19 @@ unset PATH
 export PATH="/usr/local/bin:/usr/bin:/bin"
 
 modules="$HOME/.bash/modules"
+
+
+## Cloud Services
+#
+# == Google Cloud Engine app
+source $modules/google-cloud.sh
+# == Load the EC2 config if available
+if [ -e $modules/ec2.sh ]
+then source $modules/ec2.sh
+fi
+
+## General
+#
 # == General colors to use on the terminal
 source $modules/colors.sh
 # == SSH - PGP keychain manager
@@ -38,10 +51,7 @@ source $modules/localbin.sh
 source $modules/ruby.sh
 # == RVM config
 source $modules/rvm.sh
-# == Load the EC2 config if available
-if [ -e $modules/ec2.sh ]
-then source $modules/ec2.sh
-fi
+
 
 # Test for an interactive shell.  There is no need to set anything
 # past this point for scp and rcp, and it's important to refrain from
