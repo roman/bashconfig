@@ -148,7 +148,7 @@ function print_env {
     if [[ $env_string_size -gt 0 ]]; then
         printf "$env_string "
     fi
-    exit $?
+    exit $result
 }
 
 # This prompt should print:
