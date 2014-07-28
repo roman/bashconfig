@@ -54,8 +54,8 @@ source $modules/rvm.sh
 # == Hitch (Pair Programming)
 source $modules/hitch.sh
 # == Load the EC2 config if available
-if [ -e $modules/ec2.sh ]
-then source $modules/ec2.sh
+if [ -e $modules/aws.sh ]
+then source $modules/aws.sh
 fi
 
 # Test for an interactive shell.  There is no need to set anything
