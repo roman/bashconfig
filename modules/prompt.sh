@@ -80,7 +80,7 @@ function last_command_result {
 
   if [[ $result -ne 0 ]]; then
   # print a green "$" sign if the last command was successful
-    echo "[$result] "
+    echo "（╯°□°）╯︵ ┻━┻  [$result] "
     echo ""
   fi
 
