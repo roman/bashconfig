@@ -51,6 +51,8 @@ source $modules/localbin.sh
 source $modules/ruby.sh
 # == RVM config
 source $modules/rvm.sh
+# == Virtualenv config
+source $modules/virtualenv.sh
 # == Hitch (Pair Programming)
 source $modules/hitch.sh
 # == Load the EC2 config if available

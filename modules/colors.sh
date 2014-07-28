@@ -7,7 +7,7 @@ if [ $platform = 'Linux' ]
 then
   alias ls='ls --color'
 elif [ $platform = 'Darwin' ]
-then 
+then
   # Allow the ls command to have colors when displaying directories
   export CLICOLOR=1
   export LSCOLOR=ExFxCxDxBxegedabagacad
@@ -20,4 +20,3 @@ export LIGHT_BLACK_BG="\033[1;40m"
 export LIGHT_YELLOW_FG="\033[1;33m"
 export LIGHT_MAGENTA_FG="\033[1;35m"
 export RESET="\033[0m"
-
