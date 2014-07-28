@@ -51,7 +51,12 @@ source $modules/localbin.sh
 source $modules/ruby.sh
 # == RVM config
 source $modules/rvm.sh
-
+# == Hitch (Pair Programming)
+source $modules/hitch.sh
+# == Load the EC2 config if available
+if [ -e $modules/ec2.sh ]
+then source $modules/ec2.sh
+fi
 
 # Test for an interactive shell.  There is no need to set anything
 # past this point for scp and rcp, and it's important to refrain from
@@ -62,5 +67,4 @@ if [[ $- != *i* ]] ; then
 fi
 
 unset PROMPT_COMMAND
-
 export SLIMERJSLAUNCHER=/Applications/Firefox.app/Contents/MacOS/firefox
