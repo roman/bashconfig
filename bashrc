@@ -47,6 +47,8 @@ source $modules/nodejs.sh
 source $modules/homebrew.sh
 # == Home Binaries
 source $modules/localbin.sh
+# == Heroku config
+source $modules/heroku.sh
 # == Ruby config
 source $modules/ruby.sh
 # == RVM config
@@ -69,4 +71,4 @@ if [[ $- != *i* ]] ; then
 fi
 
 unset PROMPT_COMMAND
-export SLIMERJSLAUNCHER=/Applications/Firefox.app/Contents/MacOS/firefox
+# export SLIMERJSLAUNCHER=/Applications/Firefox.app/Contents/MacOS/firefox
