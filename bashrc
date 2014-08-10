@@ -7,7 +7,7 @@ set -o emacs
 platform=`uname`
 
 unset PATH
-export PATH="/usr/local/bin:/usr/bin:/bin"
+export PATH="/usr/local/bin:/usr/bin:/usr/sbin:/sbin:/bin"
 
 modules="$HOME/.bash/modules"
 
