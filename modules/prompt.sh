@@ -107,7 +107,9 @@ function color_for_user {
     local user=`whoami`
 
     if [[ $user = 'vagrant' ]]; then
-        echo -e "$LIGHT_MAGENTA_FG"
+        echo -e "$LIGHT_YELLOW_FG"
+    else
+        echo -e "$LIGHT_BLUE_FG"
     fi
 
     exit $result
@@ -166,6 +168,6 @@ function print_env {
 # about that
 
 #export PS1="\n\$(get_ghc_sandboxed)\$(get_current_virtualenv)\$(get_current_gemset) \$(color_for_user)\u$RESET@\h: \[$LIGHT_RED_FG\]\w\[$RESET\] \
-export PS1="\n\$(print_env)\$(color_for_user)\u$RESET@\h: \[$LIGHT_RED_FG\]\w\[$RESET\] \
+export PS1="\n\$(print_env)\$(color_for_user)\u@\h$RESET: \[$LIGHT_RED_FG\]\w\[$RESET\] \
 \$(perform_git_check)\n\
 \[\$(color_for_last_command_result)\]\$(last_command_result)\$\[$RESET\] "
