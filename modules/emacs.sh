@@ -1,14 +1,13 @@
 #!/bin/sh
 
-# If EMACS_HOME has length eq to zero
-# we start with initialization, otherwise
-# we skip
+# If EMACS_HOME has length eq to zero we start with initialization,
+# otherwise we skip
 if [[ -z $EMACS_HOME ]]; then
-  EMACS_HOME="$HOME/.emacs.d"
-  export EMACS_HOME
+    export EMACS_HOME="$HOME/.emacs.d"
+    alias emacs_home="cd $EMACS_HOME"
+fi
 
-  echo "$PATH" | grep '.cask/bin' > /dev/null
-  if [[ $? = 1 ]]; then
-      export PATH="$HOME/.cask/bin:$PATH"
-  fi
+# Cask configuration
+if ! [[ $PATH = *$HOME/.cask/bin* ]]; then
+    export PATH="$HOME/.cask/bin:$PATH"
 fi
