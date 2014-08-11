@@ -13,6 +13,5 @@ fi
 # in the PATH variable, include it.
 if ! [[ $PATH = *$HOME/.cabal/bin* ]]; then
   # Adding Cabal executables to the PATH
-  PATH="$HOME/.cabal/bin:$PATH"
-  export PATH
+  export PATH="$HOME/.cabal/bin:$PATH"
 fi
