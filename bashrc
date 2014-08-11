@@ -23,6 +23,8 @@ fi
 
 ## General
 #
+# == Nix package manager
+source $modules/nix.sh
 # == General colors to use on the terminal
 source $modules/colors.sh
 # == SSH - PGP keychain manager
@@ -49,14 +51,14 @@ source $modules/homebrew.sh
 source $modules/localbin.sh
 # == Heroku config
 source $modules/heroku.sh
-# == Ruby config
-source $modules/ruby.sh
-# == RVM config
-source $modules/rvm.sh
 # == Virtualenv config
 source $modules/virtualenv.sh
 # == Hitch (Pair Programming)
 source $modules/hitch.sh
+# == Ruby config
+source $modules/ruby.sh
+# == RVM config
+source $modules/rvm.sh
 # == Load the EC2 config if available
 if [ -e $modules/aws.sh ]
 then source $modules/aws.sh
@@ -71,4 +73,3 @@ if [[ $- != *i* ]] ; then
 fi
 
 unset PROMPT_COMMAND
-# export SLIMERJSLAUNCHER=/Applications/Firefox.app/Contents/MacOS/firefox
