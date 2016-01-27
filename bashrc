@@ -73,3 +73,24 @@ if [[ $- != *i* ]] ; then
 fi
 
 unset PROMPT_COMMAND
+if [ -e /Users/roman/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/roman/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
+function setup_front_terminal {
+  machine="${1-castleblack}"
+  cd "$HOME/Machines/$machine";
+  vagrant up;
+  ssh-add "$HOME/.vagrant.d/insecure_private_key"; 
+  ssh -t vagrant@127.0.0.1 -p 2222 'mux start develop';
+}
+
+function setup_right_terminal {
+  machine="${1-castleblack}"
+  cd "$HOME/Machines/$machine";
+  ssh -t vagrant@127.0.0.1 -p 2222 'tmux -L develop new-session -t develop \; select-window -t right';
+}
+
+function setup_left_terminal {
+  machine="${1-castleblack}"
+  cd "$HOME/Machines/$machine";
+  ssh -t vagrant@127.0.0.1 -p 2222 'tmux -L develop new-session -t develop \; select-window -t left';
+}
